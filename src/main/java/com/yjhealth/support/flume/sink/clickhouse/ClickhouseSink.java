@@ -1,6 +1,5 @@
 package com.yjhealth.support.flume.sink.clickhouse;
 
-import com.google.common.base.Preconditions;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.flume.*;
 import org.apache.flume.conf.Configurable;
@@ -36,8 +35,9 @@ public class ClickhouseSink extends AbstractSink implements Configurable {
         }
         try {
             configurer.init(context);
-        } catch (IllegalAccessException ignored) {}
-        Preconditions.checkArgument(configurer != null, "init configurer failed!");
+        } catch (Exception e) {
+            logger.error("init configurer failed!");
+        }
     }
 
     @Override
